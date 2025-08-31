@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Results | Admin</title>
+  <link rel="stylesheet" href="../css/admin.css">
+  <style>
+    body { margin:0; background: #f4f6fc; }
+    .container { display: flex; }
+    main { flex: 1; padding: 40px; background: #f4f6fc; min-height: 100vh; }
+    .main-card {
+      margin: 40px auto;
+      max-width: 1200px;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 8px 32px rgba(60,72,128,0.12);
+      padding: 40px 0;
+      text-align: center;
+    }
+    .faculty-form-card {
+      background: #f5f7fa;
+      border-radius: 18px;
+      max-width: 900px;
+      margin: 32px auto 0 auto;
+      padding: 40px 40px 32px 40px;
+      box-shadow: 0 2px 12px rgba(60,72,128,0.06);
+      text-align: left;
+    }
+    .faculty-form-card label {
+      font-weight: 600;
+      color: #3949ab;
+      margin-top: 18px;
+      display: block;
+      font-size: 1.08em;
+    }
+    .faculty-form-card input {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0 22px 0;
+      border: 1.5px solid #bdbdbd;
+      border-radius: 7px;
+      font-size: 1.08em;
+      background: #f5f7fa;
+      transition: border 0.2s;
+    }
+    .faculty-form-card input:focus {
+      border-color: #3949ab;
+      outline: none;
+    }
+    .faculty-form-card button {
+      background: linear-gradient(90deg, #009688 0%, #3949ab 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1.1em;
+      box-shadow: 0 2px 8px rgba(60,72,128,0.08);
+      transition: background 0.2s, box-shadow 0.2s;
+      margin-top: 10px;
+    }
+    .faculty-form-card button:hover {
+      background: linear-gradient(90deg, #00796b 0%, #1a237e 100%);
+      box-shadow: 0 4px 16px rgba(60,72,128,0.16);
+    }
+    .sidebar-icon {
+      font-size: 1.3em;
+      margin-right: 12px;
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      padding: 12px 25px;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .sidebar-link.active, .sidebar-link:hover {
+      background: rgba(255,255,255,0.12);
+    }
+    .logo {
+      background:#ffd600;color:#1a237e;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7em;font-weight:bold;margin-right:15px;
+    }
+    .brand {
+      display:flex;align-items:center;padding:30px 20px 20px 20px;
+    }
+    .title { font-size:1.3em;font-weight:600; }
+    .sub { font-size:0.95em;opacity:0.8; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <aside class="aside">
+    <div class="brand"><div class="logo">SC</div><div><div class="title">Smart Campus</div><div class="sub">Admin</div></div></div>
+    <ul class="menu">
+      <li><a href="admin-dashboard.html">🏠 Dashboard</a></li>
+      <li><a href="manage-students.html">🎓 Manage Students</a></li>
+      <li><a href="timetable.html">📅 Timetable</a></li>
+      <li><a href="results-upload.html" class="active">📑 Results</a></li>
+      <li><a href="events.html">📢 Events</a></li>
+      <li><a href="../login.html">🚪 Logout</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <div class="main-card">
+      <h1>📑 Upload Results</h1>
+      <form id="resultForm">
+        <div class="form-row">
+          <div><label>Student ID</label><input type="text" id="studentId" required></div>
+          <div><label>Course Code</label><input type="text" id="courseCode" required></div>
+          <div><label>Marks</label><input type="number" id="marks" required></div>
+          <div><label>Grade</label>
+            <select id="grade" required>
+              <option>A</option><option>B</option><option>C</option><option>D</option><option>F</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit">Upload</button>
+      </form>
+      <hr class="sep">
+      <h2>📊 Uploaded Results</h2>
+      <table>
+        <thead><tr><th>Student ID</th><th>Course</th><th>Marks</th><th>Grade</th></tr></thead>
+        <tbody id="resultsTable"></tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<footer class="footer">© 2025 Smart Campus - Admin</footer>
+<script src="../js/app.js"></script>
+</body>
+</html>

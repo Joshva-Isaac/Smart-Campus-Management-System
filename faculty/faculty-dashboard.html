@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Dashboard</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container">
+  <aside class="aside">
+    <div class="brand"><div class="logo">SC</div><div><div class="title">Smart Campus</div><div class="sub">Faculty</div></div></div>
+    <ul class="menu">
+      <li><a href="faculty-dashboard.html" class="active">🏠 Dashboard</a></li>
+      <li><a href="attendance.html">📊 Mark Attendance</a></li>
+      <li><a href="evaluations.html">📝 Evaluations</a></li>
+      <li><a href="../login.html">🚪 Logout</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <div class="main-card">
+      <h1>👨‍🏫 Faculty Dashboard</h1>
+      <h2>👤 Profile</h2>
+      <p><b>ID:</b> F001</p>
+      <p><b>Name:</b> Dr. John</p>
+      <p><b>Subject:</b> Programming</p>
+      <p><b>Working Hours:</b> 20</p>
+
+      <h2>📢 Announcements</h2>
+      <ul id="studentAnnouncements"></ul>
+    </div>
+  </main>
+</div>
+<footer class="footer">© 2025 Smart Campus - Faculty</footer>
+<script src="../js/app.js"></script>
+<script>
+  loadStudentAnnouncements();
+
+  function markAttendance(studentId, subject, status) {
+    let db = JSON.parse(localStorage.getItem("db")) || {students: []};
+    let student = db.students.find(s => s.id === studentId);
+    if (!student) return;
+    if (!student.attendance) student.attendance = {};
+    if (typeof student.attendance[subject] !== "number") student.attendance[subject] = 100;
+    if (status === "present") {
+      student.attendance[subject] = Math.min(100, student.attendance[subject] + 10);
+    } else if (status === "absent") {
+      student.attendance[subject] = Math.max(0, student.attendance[subject] - 10);
+    }
+    localStorage.setItem("db", JSON.stringify(db));
+  }
+</script>
+</body>
+</html>

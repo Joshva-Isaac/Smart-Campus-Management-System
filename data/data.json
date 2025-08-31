@@ -1,0 +1,21 @@
+{
+  "students": [
+    { "id": "192421085", "name": "joshva", "course": "B.Tech It", "attendance": {
+      "Programming": 100,
+      "Mathematics": 100
+    }, "results": [
+      {"code": "CS101", "name": "Programming", "credits": 4, "marks": 88, "grade": "A"},
+      {"code": "MA101", "name": "Mathematics", "credits": 3, "marks": 72, "grade": "B"}
+    ]},
+    { "id": "192421275", "name": "naren swamy", "course": "B.Tech Cse", "attendance": 85, "results": [
+      {"code": "CS102", "name": "Data Structures", "credits": 4, "marks": 85, "grade": "A"},
+      {"code": "MA102", "name": "Discrete Mathematics", "credits": 3, "marks": 78, "grade": "B"}
+    ]}
+  ],
+  "faculty": [
+    { "id": "F001", "name": "Dr. John", "subject": "Programming", "hours": 20 }
+  ],
+  "events": [
+    { "title": "Tech Fest 2025", "date": "2025-09-15" }
+  ]
+}

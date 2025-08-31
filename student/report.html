@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report | Student</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container">
+  <aside class="aside">
+    <ul class="menu">
+      <li><a href="student-dashboard.html">🏠 Dashboard</a></li>
+      <li><a href="attendance.html">📊 Attendance</a></li>
+      <li><a href="enrollment.html" >📝 Enrollment</a></li>
+      <li><a href="results.html">📑 Results</a></li>
+      <li><a href="report.html" class="active">📘 Report</a></li>
+      <li><a href="nodue.html">✅ No Due</a></li>
+      <li><a href="info.html">ℹ️ Info</a></li>
+    </ul>
+  </aside>
+  <main>
+    <div class="main-card">
+      <h1>📘 Academic Report</h1>
+      <p>This section will summarize your performance:</p>
+      <ul>
+        <li><b>Attendance:</b> <span id="reportAttendance"></span>%</li>
+        <li><b>Average Marks:</b> <span id="reportMarks"></span></li>
+        <li><b>Overall Grade:</b> <span id="reportGrade"></span></li>
+      </ul>
+    </div>
+  </main>
+</div>
+<footer class="footer">© 2025 Smart Campus</footer>
+<script src="../js/app.js"></script>
+<script> loadStudentReport(); </script>
+</body>
+</html>

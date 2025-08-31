@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Enrollment | Student</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container">
+  <aside class="aside">
+    <ul class="menu">
+      <li><a href="student-dashboard.html">🏠 Dashboard</a></li>
+      <li><a href="attendance.html">📊 Attendance</a></li>
+      <li><a href="results.html">📑 Results</a></li>
+      <li><a href="enrollment.html" class="active">📝 Enrollment</a></li>
+      <li><a href="report.html">📘 Report</a></li>
+      <li><a href="nodue.html">✅ No Due</a></li>
+      <li><a href="info.html">ℹ️ Info</a></li>
+    </ul>
+  </aside>
+  <main>
+    <div class="main-card">
+      <h1>📝 Course Enrollment</h1>
+      <p>Select subjects for each slot (as opened by faculty):</p>
+
+      <form id="enrollmentForm">
+        <label for="slotA">Slot A:</label>
+        <select id="slotA" name="slotA"></select>
+
+        <label for="slotB">Slot B:</label>
+        <select id="slotB" name="slotB"></select>
+
+        <label for="slotC">Slot C:</label>
+        <select id="slotC" name="slotC"></select>
+
+        <label for="slotD">Slot D:</label>
+        <select id="slotD" name="slotD"></select>
+
+        <button type="submit">Submit Enrollment</button>
+      </form>
+
+      <h2>📋 Your Current Enrollment</h2>
+      <ul id="studentEnrollment"></ul>
+    </div>
+
+    <div class="main-card">
+      <h1 style="font-size:2em;color:#444;margin-bottom:25px;">Subject Enrollment</h1>
+      <form id="enrollForm">
+        <label for="subjectSelect" style="font-weight:500;">Select Subject:</label>
+        <select id="subjectSelect" required style="margin:10px 0 20px 0;">
+          <option value="">-- Choose Subject --</option>
+          <option value="Programming">Programming</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="Data Structures">Data Structures</option>
+          <option value="Machine Learning">Machine Learning</option>
+        </select>
+        <button type="submit" style="padding:8px 18px;background:#3949ab;color:#fff;border:none;border-radius:6px;cursor:pointer;">Enroll</button>
+      </form>
+      <div id="enrollStatus" style="margin-top:20px;font-size:1.1em;color:#009688;"></div>
+    </div>
+  </main>
+</div>
+<footer class="footer">© 2025 Smart Campus</footer>
+<script src="../js/app.js"></script>
+<script>
+  loadEnrollmentForm();
+  document.getElementById("enrollmentForm").addEventListener("submit", saveStudentEnrollment);
+
+  document.getElementById("enrollForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const subject = document.getElementById("subjectSelect").value;
+    if(subject) {
+      document.getElementById("enrollStatus").textContent = "You have enrolled in: " + subject;
+    } else {
+      document.getElementById("enrollStatus").textContent = "Please select a subject.";
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance | Student</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container">
+  <aside class="aside">
+    <ul class="menu">
+      <li><a href="student-dashboard.html">🏠 Dashboard</a></li>
+      <li><a href="attendance.html" class="active">📊 Attendance</a></li>
+      <li><a href="enrollment.html" >📝 Enrollment</a></li>
+      <li><a href="results.html">📑 Results</a></li>
+      <li><a href="report.html">📘 Report</a></li>
+      <li><a href="nodue.html">✅ No Due</a></li>
+      <li><a href="info.html">ℹ️ Info</a></li>
+    </ul>
+  </aside>
+  <main>
+    <div class="main-card">
+      <h1><span style="font-size:1.5em;">📊</span> <span style="color:#1a237e;">Attendance</span></h1>
+      <label for="subjectSelect">Select Subject:</label>
+      <select id="subjectSelect">
+        <option value="Programming">Programming</option>
+        <option value="Mathematics">Mathematics</option>
+      </select>
+      <div id="attendancePercent" style="margin-top:20px;font-size:1.5em;font-weight:bold;color:#3949ab;">
+        <span id="attendanceValue"></span>
+      </div>
+    </div>
+    <div class="main-card">
+      <h1 style="font-size:2em;color:#444;margin-bottom:25px;">Attendance Report</h1>
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="background:#f5f5f5;">
+            <th>S No.</th>
+            <th>Course Code</th>
+            <th>Course Name</th>
+            <th>Class Attended</th>
+            <th>Attended Hours</th>
+            <th>Total Class</th>
+            <th>Total Hours</th>
+            <th>%</th>
+            <th>View</th>
+          </tr>
+        </thead>
+        <tbody id="attendanceTableBody"></tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<footer class="footer">© 2025 Smart Campus</footer>
+<script src="../js/app.js"></script>
+<script>
+  function loadStudentAttendance(studentId, subject) {
+    let db = JSON.parse(localStorage.getItem("db")) || {};
+    let student = db.students?.find(s => s.id === studentId);
+    let valueSpan = document.getElementById("attendanceValue");
+    if (student && student.attendance && typeof student.attendance[subject] === "number") {
+      valueSpan.textContent = student.attendance[subject] + "%";
+    } else {
+      valueSpan.textContent = "100";
+    }
+  }
+
+  // Initial load for selected subject
+  const studentId = "192421085"; // Use logged-in student ID
+  const subjectSelect = document.getElementById("subjectSelect");
+  loadStudentAttendance(studentId, subjectSelect.value);
+
+  // Update on subject change
+  subjectSelect.addEventListener("change", function() {
+    loadStudentAttendance(studentId, this.value);
+  });
+
+  // Real-time update when faculty changes attendance
+  window.addEventListener("storage", function(event) {
+    if (event.key === "db") loadStudentAttendance(studentId, subjectSelect.value);
+  });
+
+  const courses = [
+  
+    { code: "MMA0504", name: "mathematics", totalClass: 25, totalHours: 25 },
+    { code: "CSA1108", name: "Object Oriented Analysis and Design with UML and Design Patterns", totalClass: 42, totalHours: 42 }
+  ];
+
+  // Simulate student attendance data (replace with real data from localStorage/db)
+  const studentAttendance = {
+    "MMA0504": { attendedClass: 24, attendedHours: 10 },
+    "CSA1108": { attendedClass: 34, attendedHours: 34 }
+  };
+
+  function renderAttendanceTable() {
+    let tbody = document.getElementById("attendanceTableBody");
+    tbody.innerHTML = "";
+    courses.forEach((course, idx) => {
+      const att = studentAttendance[course.code] || { attendedClass: 0, attendedHours: 0 };
+      const percent = course.totalClass ? Math.round((att.attendedClass / course.totalClass) * 100) : 0;
+      tbody.innerHTML += `
+        <tr>
+          <td>${idx + 1}</td>
+          <td>${course.code}</td>
+          <td>${course.name}</td>
+          <td>${att.attendedClass}</td>
+          <td>${att.attendedHours}</td>
+          <td>${course.totalClass}</td>
+          <td>${course.totalHours}</td>
+          <td>
+            <span style="background:${percent>=90?'#26c6da':'#3949ab'};color:#fff;padding:4px 12px;border-radius:6px;font-weight:bold;">${percent} %</span>
+          </td>
+          <td>
+            <button style="background:#f44336;color:#fff;border:none;padding:4px 12px;border-radius:6px;cursor:pointer;">Details</button>
+          </td>
+        </tr>
+      `;
+    });
+  }
+  renderAttendanceTable();
+</script>
+</body>
+</html>

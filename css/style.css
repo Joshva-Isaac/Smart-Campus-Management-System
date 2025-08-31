@@ -1,0 +1,323 @@
+/* =======================
+   SMART CAMPUS MANAGEMENT
+   PROFESSIONAL STYLE
+   ======================= */
+
+:root {
+  --primary: #1a237e;   /* Deep Navy Blue */
+  --secondary: #3949ab; /* Indigo */
+  --accent: #ffb300;    /* Amber */
+  --light: #f5f5f5;     /* Background Light */
+  --dark: #212121;      /* Text Dark */
+  --success: #43a047;
+  --danger: #e53935;
+  --font: 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font);
+}
+
+body {
+  background: var(--light);
+  color: var(--dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* -----------------------
+   Layout
+   ----------------------- */
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+aside.aside {
+  width: 250px;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: fixed;
+  top: 0; left: 0;
+  bottom: 0;
+}
+
+main {
+  flex: 1;
+  margin-left: 250px;
+  padding: 30px;
+}
+
+/* -----------------------
+   Branding
+   ----------------------- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  background: var(--accent);
+  color: var(--dark);
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 50px; height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sub {
+  font-size: 12px;
+  color: #ddd;
+}
+
+/* -----------------------
+   Menu
+   ----------------------- */
+
+.menu {
+  list-style: none;
+  flex: 1;
+}
+
+.menu li {
+  margin: 12px 0;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.menu a:hover,
+.menu a.active {
+  background: var(--secondary);
+}
+
+/* -----------------------
+   Cards
+   ----------------------- */
+
+.main-card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  margin-bottom: 25px;
+  text-align: center; /* Add this line to center all content */
+}
+
+.main-card h1 {
+  font-size: 24px;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.main-card h2 {
+  margin: 15px 0 8px;
+  color: var(--secondary);
+}
+
+.main-card p, 
+.main-card li {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* -----------------------
+   Tables
+   ----------------------- */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 15px;
+}
+
+table th, table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+table th {
+  background: var(--secondary);
+  color: white;
+}
+
+/* -----------------------
+   Forms
+   ----------------------- */
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin: 10px 0 5px;
+  font-weight: 500;
+}
+
+form input, form select, form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+form button {
+  background: var(--secondary);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+form button:hover {
+  background: var(--primary);
+}
+
+/* -----------------------
+   Footer
+   ----------------------- */
+
+.footer {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 12px;
+  font-size: 13px;
+  margin-top: auto;
+}
+
+/* -----------------------
+   Responsive
+   ----------------------- */
+
+@media (max-width: 768px) {
+  aside.aside {
+    width: 200px;
+  }
+  main {
+    margin-left: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  aside.aside {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  main {
+    margin-left: 0;
+  }
+}
+/* =======================
+   END OF STYLE
+   ======================= */   
+   /* =======================
+   LOGIN PAGE STYLING
+   ======================= */
+
+.login-body {
+  background-image: url('https://content3.jdmagicbox.com/v2/comp/chennai/u1/044pxx44.xx44.240305201246.q5u1/catalogue/engineering-admission-simats-kuthambakkam-chennai-universities-kG6eiBw1El.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  width: 350px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+}
+
+.login-container h1 {
+  color: var(--primary);
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.login-container h2 {
+  color: var(--secondary);
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container label {
+  text-align: left;
+  margin: 10px 0 5px;
+  font-weight: 500;
+}
+
+.login-container input,
+.login-container select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.login-container button {
+  background: var(--primary);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-container button:hover {
+  background: var(--secondary);
+}
+.login-error {
+  color: var(--danger);
+  margin-bottom: 15px;
+  font-size: 14px;
+}

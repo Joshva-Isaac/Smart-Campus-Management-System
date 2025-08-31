@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Attendance</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .attendance-table th, .attendance-table td { padding: 8px; text-align: center; }
+    .attendance-table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    .attendance-table th, .attendance-table td { border: 1px solid #ddd; }
+    .present-btn, .absent-btn {
+      border: none; background: none; cursor: pointer; font-size: 1.2em;
+    }
+    .present-btn { color: #009688; }
+    .absent-btn { color: #f44336; }
+    .course-select { margin-bottom: 20px; }
+    .aside {
+      background: #1a237e;
+      color: #fff;
+      min-width: 220px;
+      min-height: 100vh;
+      padding: 0;
+    }
+    .aside .brand {
+      display: flex;
+      align-items: center;
+      padding: 30px 20px 20px 20px;
+    }
+    .aside .logo {
+      background: #ffd600;
+      color: #1a237e;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7em;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+    .aside .title {
+      font-size: 1.3em;
+      font-weight: 600;
+    }
+    .aside .sub {
+      font-size: 0.95em;
+      opacity: 0.8;
+    }
+    .aside .menu {
+      list-style: none;
+      padding: 0;
+      margin-top: 30px;
+    }
+    .aside .menu li {
+      margin-bottom: 8px;
+    }
+    .aside .menu a {
+      display: flex;
+      align-items: center;
+      padding: 12px 25px;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .aside .menu a span {
+      font-size: 1.2em;
+      margin-right: 12px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <aside class="aside">
+    <div class="brand">
+      <div class="logo">SC</div>
+      <div>
+        <div class="title">Smart Campus</div>
+        <div class="sub">Faculty</div>
+      </div>
+    </div>
+    <ul class="menu">
+      <li><a href="faculty-dashboard.html">🏠 Dashboard</a></li>
+      <li><a href="attendance.html">📊 Mark Attendance</a></li>
+      <li><a href="evaluations.html" class="active">📖 evaluations</a></li>
+      <li><a href="../login.html">🚪 Logout</a></li>
+    </ul>
+  </aside>
+  <main>
+    <div class="main-card">
+      <h1>Attendance Marking</h1>
+      <label for="course" style="color:red;">Course</label>
+      <select id="course" class="course-select">
+        <option value="Programming">Programming</option>
+        <option value="Mathematics">Mathematics</option>
+      </select>
+      <form id="attendanceForm">
+        <table class="attendance-table">
+          <thead>
+            <tr>
+              <th>S No.</th>
+              <th>Reg No.</th>
+              <th>Student Name</th>
+              <th>Present</th>
+              <th>Absent</th>
+            </tr>
+          </thead>
+          <tbody id="attendanceTableBody"></tbody>
+        </table>
+        <button type="submit" style="margin-top:15px;">Submit Attendance</button>
+      </form>
+    </div>
+  </main>
+</div>
+<footer class="footer">© 2025 Smart Campus - Faculty</footer>
+<script src="../js/app.js"></script>
+<script>
+const students = [
+  { id: "192421085", name: "joshva" },
+  { id: "192421275", name: "naren swamy" }
+];
+
+function getDB() {
+  return JSON.parse(localStorage.getItem("db")) || {students: []};
+}
+function saveDB(db) {
+  localStorage.setItem("db", JSON.stringify(db));
+}
+
+function renderAttendanceTable() {
+  const subject = document.getElementById("course").value;
+  let db = getDB();
+  let tbody = document.getElementById("attendanceTableBody");
+  tbody.innerHTML = "";
+  students.forEach((s, idx) => {
+    let studentDB = db.students.find(stu => stu.id === s.id) || {};
+    tbody.innerHTML += `
+      <tr>
+        <td>${idx + 1}</td>
+        <td>${s.id}</td>
+        <td>${s.name}</td>
+        <td>
+          <input type="checkbox" name="present_${s.id}" title="Present">
+        </td>
+        <td>
+          <input type="checkbox" name="absent_${s.id}" title="Absent">
+        </td>
+      </tr>
+    `;
+  });
+}
+document.getElementById("course").addEventListener("change", renderAttendanceTable);
+renderAttendanceTable();
+
+document.getElementById("attendanceForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const subject = document.getElementById("course").value;
+  let db = getDB();
+  students.forEach(s => {
+    let presentChecked = document.querySelector(`[name="present_${s.id}"]`).checked;
+    let absentChecked = document.querySelector(`[name="absent_${s.id}"]`).checked;
+    let student = db.students.find(stu => stu.id === s.id);
+    if (!student) return;
+    if (!student.attendance) student.attendance = {};
+    if (typeof student.attendance[subject] !== "number") student.attendance[subject] = 100;
+    // Manual marking: present increases, absent decreases
+    if (presentChecked && !absentChecked) {
+      student.attendance[subject] = Math.min(100, student.attendance[subject] + 10);
+    } else if (!presentChecked && absentChecked) {
+      student.attendance[subject] = Math.max(0, student.attendance[subject] - 10);
+    }
+    // If both or neither are checked, do not change
+  });
+  saveDB(db);
+  renderAttendanceTable();
+  alert("Attendance updated!");
+});
+
+window.addEventListener("storage", function(event) {
+  if (event.key === "db") renderAttendanceTable();
+});
+</script>
+</body>
+</html>
